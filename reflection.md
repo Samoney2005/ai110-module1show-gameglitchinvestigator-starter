@@ -5,14 +5,19 @@ Answer each question in 3 to 5 sentences. Be specific and honest about what actu
 ## 1. What was broken when you started?
 
 - What did the game look like the first time you ran it?
+The game looked like a number game where you had to huess a number. The game would give you hints rather to go high or low. You are also given a choice to start the game over if wanted to. 
 - List at least two concrete bugs you noticed at the start  
   (for example: "the secret number kept changing" or "the hints were backwards").
+  1. The hints were inaccurate when you enter your number choice
+  2. When the number is guessed the game will not start over
+  3. The secret number is not within the range difficuly mode of the game.
 
 ---
 
 ## 2. How did you use AI as a teammate?
 
 - Which AI tools did you use on this project (for example: ChatGPT, Gemini, Copilot)?
+I will beusing the Claude AI Extension in VSCODE.
 - Give one example of an AI suggestion that was correct (including what the AI suggested and how you verified the result).
 - Give one example of an AI suggestion that was incorrect or misleading (including what the AI suggested and how you verified the result).
 
