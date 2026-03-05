@@ -2,12 +2,18 @@ import random
 import streamlit as st
 
 def get_range_for_difficulty(difficulty: str):
+    # if the difficuly is hard then the number range must be bigger 
+    # as well as the attempt limit is smaller
+
     if difficulty == "Easy":
+        print("Range: 1-20")
         return 1, 20
     if difficulty == "Normal":
-        return 1, 100
-    if difficulty == "Hard":
+        print("Range: 1-50")
         return 1, 50
+    if difficulty == "Hard":
+        print("Range: 1-100")
+        return 1, 100
     return 1, 100
 
 
@@ -33,21 +39,13 @@ def check_guess(guess, secret):
     if guess == secret:
         return "Win", "🎉 Correct!"
 
-    try:
-        if guess > secret:
-            return "Too High", "📉 Go LOWER!"
-        else:
-            return "Too Low", "📈 Go HIGHER!"
-    except TypeError:
-        g = str(guess)
-        if g == secret:
-            return "Win", "🎉 Correct!"
-        if g > secret:
-            return "Too High", "📈 Go HIGHER!"
-        return "Too Low", "📉 Go LOWER!"
+    if guess > secret:
+        return "Too High", "📉 Go LOWER!"
+    return "Too Low", "📈 Go HIGHER!"
 
 
 def update_score(current_score: int, outcome: str, attempt_number: int):
+    # If the user wins then they should get points
     if outcome == "Win":
         points = 100 - 10 * (attempt_number + 1)
         if points < 10:
@@ -78,8 +76,10 @@ difficulty = st.sidebar.selectbox(
 )
 
 attempt_limit_map = {
-    "Easy": 6,
-    "Normal": 8,
+    # The hardest difficulty should be the least amount of attempts
+    # the greatest amount of attempts should be the easiest
+    "Easy": 8,
+    "Normal": 6,
     "Hard": 5,
 }
 attempt_limit = attempt_limit_map[difficulty]
@@ -107,7 +107,7 @@ if "history" not in st.session_state:
 st.subheader("Make a guess")
 
 st.info(
-    f"Guess a number between 1 and 100. "
+    f"Guess a number between {low} and {high}. "
     f"Attempts left: {attempt_limit - st.session_state.attempts}"
 )
 
@@ -131,9 +131,14 @@ with col2:
 with col3:
     show_hint = st.checkbox("Show hint", value=True)
 
+# The main issue that was here in the game is that the secret number 
+# is being determined through a random range this is cause the secret 
+# number to be outside of the range of the difficulty level selected
+
 if new_game:
     st.session_state.attempts = 0
-    st.session_state.secret = random.randint(1, 100)
+    st.session_state.secret = random.randint(low, high)
+    st.session_state.status = "playing"
     st.success("New game started.")
     st.rerun()
 
@@ -155,10 +160,11 @@ if submit:
     else:
         st.session_state.history.append(guess_int)
 
-        if st.session_state.attempts % 2 == 0:
-            secret = str(st.session_state.secret)
-        else:
-            secret = st.session_state.secret
+        # The glitch that was  here is that the guessed attempt number
+        # isnt actually changing its that the secret converts
+        # to a string every other attempt when even 
+
+        secret = st.session_state.secret
 
         outcome, message = check_guess(guess_int, secret)
 
@@ -170,10 +176,14 @@ if submit:
             outcome=outcome,
             attempt_number=st.session_state.attempts,
         )
+        
+        # This change allowed the game to restart if the user presses the 
+        # button at any time as well as the random function being set to 
+        # low  to high instead of 1, 100 which messed up the numbers guessed
 
         if new_game:
             st.session_state.attempts = 0
-            st.session_state.secret = random.randint(1, 100)
+            st.session_state.secret = random.randint(low, high)
             st.session_state.status = "playing"
             st.session_state.score = 0
             st.session_state.history = []

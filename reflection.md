@@ -29,7 +29,8 @@ After this happened what I did was control Z and started a fresh new chat window
 ## 3. Debugging and testing your fixes
 
 - How did you decide whether a bug was really fixed?
-
+I had to run the program to see if the code was actually fix or not> This is because when I fixed som errors I caused so other errors
+either to come back or create new ones. 
 
 - Describe at least one test you ran (manual or using pytest)  
   and what it showed you about your code.
