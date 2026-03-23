@@ -1,66 +1,6 @@
 import random
 import streamlit as st
-
-def get_range_for_difficulty(difficulty: str):
-    # if the difficuly is hard then the number range must be bigger 
-    # as well as the attempt limit is smaller
-
-    if difficulty == "Easy":
-        print("Range: 1-20")
-        return 1, 20
-    if difficulty == "Normal":
-        print("Range: 1-50")
-        return 1, 50
-    if difficulty == "Hard":
-        print("Range: 1-100")
-        return 1, 100
-    return 1, 100
-
-
-def parse_guess(raw: str):
-    if raw is None:
-        return False, None, "Enter a guess."
-
-    if raw == "":
-        return False, None, "Enter a guess."
-
-    try:
-        if "." in raw:
-            value = int(float(raw))
-        else:
-            value = int(raw)
-    except Exception:
-        return False, None, "That is not a number."
-
-    return True, value, None
-
-
-def check_guess(guess, secret):
-    if guess == secret:
-        return "Win", "🎉 Correct!"
-
-    if guess > secret:
-        return "Too High", "📉 Go LOWER!"
-    return "Too Low", "📈 Go HIGHER!"
-
-
-def update_score(current_score: int, outcome: str, attempt_number: int):
-    # If the user wins then they should get points
-    if outcome == "Win":
-        points = 100 - 10 * (attempt_number + 1)
-        if points < 10:
-            points = 10
-        return current_score + points
-
-    if outcome == "Too High":
-        if attempt_number % 2 == 0:
-            return current_score + 5
-        return current_score - 5
-
-    if outcome == "Too Low":
-        return current_score - 5
-
-    return current_score
+from logic_utils import get_range_for_difficulty, parse_guess, check_guess, update_score, get_attempts_for_difficulty
 
 st.set_page_config(page_title="Glitchy Guesser", page_icon="🎮")
 
@@ -166,7 +106,15 @@ if submit:
 
         secret = st.session_state.secret
 
-        outcome, message = check_guess(guess_int, secret)
+        outcome = check_guess(guess_int, secret)
+
+        # Create message based on outcome
+        messages = {
+            "Win": "🎉 Correct!",
+            "Too High": "📉 Go LOWER!",
+            "Too Low": "📈 Go HIGHER!"
+        }
+        message = messages.get(outcome, "")
 
         if show_hint:
             st.warning(message)

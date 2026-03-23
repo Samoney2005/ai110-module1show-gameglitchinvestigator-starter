@@ -9,6 +9,16 @@ def get_range_for_difficulty(difficulty: str):
     return 1, 100
 
 
+def get_attempts_for_difficulty(difficulty: str):
+    """Return the number of attempts allowed for a given difficulty."""
+    attempt_limit_map = {
+        "Easy": 8,
+        "Normal": 6,
+        "Hard": 5,
+    }
+    return attempt_limit_map.get(difficulty, 5)
+
+
 def parse_guess(raw: str):
     """
     Parse user input into an int guess.
