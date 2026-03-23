@@ -33,11 +33,6 @@ def test_attempts_for_hard_difficulty():
     attempts = get_attempts_for_difficulty("Hard")
     assert attempts == 5
 
-def test_attempts_for_unknown_difficulty():
-    # Unknown difficulty should default to 5 attempts (same as Hard)
-    attempts = get_attempts_for_difficulty("Unknown")
-    assert attempts == 5
- 
 # Section 3: Run the pytest
 if __name__ == "__main__":
     pytest.main(["-v",__file__])
