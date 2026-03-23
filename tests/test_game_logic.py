@@ -1,4 +1,4 @@
-from logic_utils import check_guess
+from logic_utils import check_guess, get_attempts_for_difficulty
 import pytest
 
 # Section 1: Guessing the Logic Tests
@@ -17,21 +17,27 @@ def test_guess_too_low():
     result = check_guess(40, 50)
     assert result == "Too Low", "📉 Go HIGHER!"
 
-# Section 2: 
+# Section 2: Difficulty Attempts Tests
+def test_attempts_for_easy_difficulty():
+    # Easy difficulty should have 8 attempts
+    attempts = get_attempts_for_difficulty("Easy")
+    assert attempts == 8
 
-def user_select():
-    # If the user selects Easy there should be more player attempts
-    # If the user selects Normal there should be less attempts then easy
-    # Lastly, If the user selects Hard it should be the least attempts out of all 3 levels.
-    result = user_select("Easy")
-    assert result == "You have 8 try attempts"
+def test_attempts_for_normal_difficulty():
+    # Normal difficulty should have 6 attempts
+    attempts = get_attempts_for_difficulty("Normal")
+    assert attempts == 6
 
-    result = user_select("Normal")
-    assert result == "You have 6 try attempts"
+def test_attempts_for_hard_difficulty():
+    # Hard difficulty should have 5 attempts
+    attempts = get_attempts_for_difficulty("Hard")
+    assert attempts == 5
 
-    result = user_select("Hard")
-    assert result == "You have 5 try attempts"
+def test_attempts_for_unknown_difficulty():
+    # Unknown difficulty should default to 5 attempts (same as Hard)
+    attempts = get_attempts_for_difficulty("Unknown")
+    assert attempts == 5
  
- # Section 3: Run the pytest
-    if __name__ == "__main__":
-        pytest.main(["-v,__file__"])
+# Section 3: Run the pytest
+if __name__ == "__main__":
+    pytest.main(["-v",__file__])
