@@ -132,7 +132,7 @@ with col3:
     show_hint = st.checkbox("Show hint", value=True)
 
 # The main issue that was here in the game is that the secret number 
-# is being determined through a random range this is cause the secret 
+# is being determined through a random range this caused the secret 
 # number to be outside of the range of the difficulty level selected
 
 if new_game:

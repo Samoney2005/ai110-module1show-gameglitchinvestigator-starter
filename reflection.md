@@ -27,15 +27,15 @@ After this happened what I did was control Z and started a fresh new chat window
 ---
 
 ## 3. Debugging and testing your fixes
-
 - How did you decide whether a bug was really fixed?
-I had to run the program to see if the code was actually fix or not> This is because when I fixed som errors I caused so other errors
-either to come back or create new ones. 
+I had to run the program to see if the code was actually fixed or not. This is because when I fixed some errors I caused others so it took longer for me to diagnose the issues. I also used pytest to help.
 
 - Describe at least one test you ran (manual or using pytest)  
   and what it showed you about your code.
+I ran a test using pytest to verify if the attempt limit had changed in the app.py file. I had a issue when I chnaged the attempts it would not run the full amount of attempts. I needed a way to find out withe the program was actually out putted compared to what I had changed.
+  
 - Did AI help you design or understand any tests? How?
-
+Yes, for one test speciffically I also had issues with for some reason when the secret number was guessed by the user the number would change. It would increase by a certain increment I didn't understand why. I asked claude to first explain the lines of code to me in that certain area of the app.py section. After that I looked at the structure of code and added comments to help me. Then I asked Ai in what order should I fix the code. I did this because previously I combated another code issue unorganized which caused me to not fully see theparts of the code that needs to be fixed.Once I changed my approach strategy fixing the code became more of a breeze. 
 ---
 
 ## 4. What did you learn about Streamlit and state?
