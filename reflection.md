@@ -34,7 +34,10 @@ either to come back or create new ones.
 
 - Describe at least one test you ran (manual or using pytest)  
   and what it showed you about your code.
+  One manual test that I ran was seeing if the game saw the change in range. For example, I first changed the in the print statement before the code to see what the game would do. Which I new that it wouldnt make a chnage / difference unless I change the code itself with the error. Eventually after playing around with the code I saw that thier were multiple areas of the code that had to be chnaged not just the print  statement. As well I noticed that when I tried to change it the range would only defalut to 1 to 100. So I had to vreak all the ranges up seperately.
+
 - Did AI help you design or understand any tests? How?
+Yes, It mostly helped me to locate the areasin the code where the errors were. This helped alot because with many lines ofcode it is hard to see the errors ir the lines of code that needs to be manipulated or changed.
 
 ---
 
