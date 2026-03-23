@@ -9,7 +9,7 @@ def get_range_for_difficulty(difficulty: str):
     return 1, 100
 
 
-def get_attempts_for_difficulty(difficulty: str):
+def get_attempts_for_difficulty(difficulty: str) -> int:
     """Return the number of attempts allowed for a given difficulty."""
     attempt_limit_map = {
         "Easy": 8,
@@ -49,15 +49,27 @@ def check_guess(guess, secret):
     outcome examples: "Win", "Too High", "Too Low"
     """
     if guess == secret:
+<<<<<<< HEAD
         return "Win"
 
     if guess > secret:
         return "Too High"
     return "Too Low"
+=======
+        return "Win", "🎉 Correct!"
+
+    if guess > secret:
+        return "Too High", "📉 Go LOWER!"
+    return "Too Low", "📈 Go HIGHER!"
+>>>>>>> d837c6db99c335096133ea2b658bb0d7df7e2d16
 
 
 def update_score(current_score: int, outcome: str, attempt_number: int):
     """Update score based on outcome and attempt number."""
+<<<<<<< HEAD
+=======
+    # If the user wins then they should get points
+>>>>>>> d837c6db99c335096133ea2b658bb0d7df7e2d16
     if outcome == "Win":
         points = 100 - 10 * (attempt_number + 1)
         if points < 10:
@@ -73,3 +85,7 @@ def update_score(current_score: int, outcome: str, attempt_number: int):
         return current_score - 5
 
     return current_score
+<<<<<<< HEAD
+=======
+
+>>>>>>> d837c6db99c335096133ea2b658bb0d7df7e2d16
